@@ -2,7 +2,7 @@ let task = document.querySelector("#task"); //input id'sini seçerek değişkene
 let liveToastBtn = document.querySelector("#liveToastBtn"); // Ekle butonunun id'sini seçip değişkene atadık.
 const ul = document.getElementsByTagName('li'); //Html'deki li taglarını seçtirdik
 let list = document.querySelector("#list") //ul listesini değişkene aktardık
-document.addEventListener('DOMContentLoaded',GetLocalStorage)
+document.addEventListener('DOMContentLoaded', GetLocalStorage)
 
 //Yeni madde eklemek ve boş kontrolü için fonksiyon
 function newElement() {
@@ -14,15 +14,15 @@ function newElement() {
         SaveLocalStorage(task.value)
         $(".success").toast("show");
         let li = document.createElement("li")
-        list.appendChild(li)   
-        li.innerHTML = task.value; 
+        list.appendChild(li)
+        li.innerHTML = task.value;
         task.value = ""
 
         //eklenen yeni maddeler için yani li elementine close button ekleme ve silme işlemi
         const button = document.createElement('button')
         button.className = 'btn-close'
         li.append(button)
-        li.onclick = check; 
+        li.onclick = check;
         button.onclick = removeButton;
 
     }
@@ -32,21 +32,21 @@ function newElement() {
 
 //Listeye bootstrap ile close button eklenmesi ve silme işlemi
 for (let i = 0; i < ul.length; i++) {
-    
+
     const button = document.createElement('button')
     button.className = 'btn-close'
 
     //Liste için oluşturulan close butonunun click eventi tetiklendiğinde çalışacak kodlar
-    ul[i].appendChild(button);   
-    ul[i].onclick = check; 
+    ul[i].appendChild(button);
+    ul[i].onclick = check;
     button.onclick = removeButton;
- 
+
 
 }
 
 // tıklanan maddein üstünü çizip yanına tik koymak için toggle switch ile oluşturulan fonksiyon
-function check(){
-    this.classList.toggle("checked"); 
+function check() {
+    this.classList.toggle("checked");
 }
 function removeButton() {
 
@@ -57,52 +57,52 @@ function removeButton() {
 
 
 //item'ları localstorage'e kaydetme
-function SaveLocalStorage(item){
+function SaveLocalStorage(item) {
     let items;
-    if(localStorage.getItem('listItem') == null){
+    if (localStorage.getItem('listItem') == null) {
         items = []
-    }else{
+    } else {
         items = JSON.parse(localStorage.getItem('listItem'))
     }
 
     items.push(item);
-    localStorage.setItem('listItem',JSON.stringify(items))
+    localStorage.setItem('listItem', JSON.stringify(items))
 }
 
 // itemları localstorage'den silme
-function DeleteLocalStorage(item){
+function DeleteLocalStorage(item) {
     let items;
-    if(localStorage.getItem('listItem') == null) {
+    if (localStorage.getItem('listItem') == null) {
         items = []
     }
     else {
         items = JSON.parse(localStorage.getItem('listItem'))
     }
-    items.splice(items.indexOf(item),1) //Splice ile item parametresini yukarda çektik ve index değerine göre silme işlemini gerçekleştirdik.
+    items.splice(items.indexOf(item), 1) //Splice ile item parametresini yukarda çektik ve index değerine göre silme işlemini gerçekleştirdik.
 
     localStorage.setItem('listItem', JSON.stringify(items))
 }
 
 //itemları localstorag'den getirme
-function GetLocalStorage(){
+function GetLocalStorage() {
     let items;
-    if(localStorage.getItem('listItem') == null){
+    if (localStorage.getItem('listItem') == null) {
         items = []
-    }else{
+    } else {
         items = JSON.parse(localStorage.getItem('listItem'))
     }
 
-    items.forEach((item)=>{
+    items.forEach((item) => {
 
         const li = document.createElement("li")
-        list.appendChild(li)   
+        list.appendChild(li)
         li.innerHTML = item
         task.value = ""
         const button = document.createElement('button')
         button.className = 'btn-close'
-        
+
         //Liste için oluşturulan close butonunun click eventi tetiklendiğinde çalışacak kodlar
-        todoLi.appendChild(button);   
+        todoLi.appendChild(button);
         button.onclick = removeButton;
 
     })
