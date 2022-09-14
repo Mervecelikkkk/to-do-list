@@ -1,6 +1,8 @@
 # to-do-list
 👩‍💻 To do list i coded to improve javascript language
 
+![to-do-list](https://user-images.githubusercontent.com/51165242/190197726-fefa30af-3732-432c-93b9-f4534b026680.png)
+
 ## Installation
 Clone the project.
 ```
